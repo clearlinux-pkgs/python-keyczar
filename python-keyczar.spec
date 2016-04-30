@@ -4,7 +4,7 @@
 #
 Name     : python-keyczar
 Version  : 0.715
-Release  : 7
+Release  : 8
 URL      : https://pypi.python.org/packages/source/p/python-keyczar/python-keyczar-0.715.tar.gz
 Source0  : https://pypi.python.org/packages/source/p/python-keyczar/python-keyczar-0.715.tar.gz
 Summary  : Toolkit for safe and simple cryptography
