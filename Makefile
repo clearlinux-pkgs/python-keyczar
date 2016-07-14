@@ -1,4 +1,5 @@
 PKG_NAME := python-keyczar
-URL := https://pypi.python.org/packages/source/p/python-keyczar/python-keyczar-0.715.tar.gz
+URL := http://pypi.debian.net/python-keyczar/python-keyczar-0.716.tar.gz
+ARCHIVES :=
 
 include ../common/Makefile.common
