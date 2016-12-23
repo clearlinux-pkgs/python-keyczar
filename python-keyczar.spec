@@ -4,7 +4,7 @@
 #
 Name     : python-keyczar
 Version  : 0.716
-Release  : 10
+Release  : 11
 URL      : http://pypi.debian.net/python-keyczar/python-keyczar-0.716.tar.gz
 Source0  : http://pypi.debian.net/python-keyczar/python-keyczar-0.716.tar.gz
 Summary  : Toolkit for safe and simple cryptography
