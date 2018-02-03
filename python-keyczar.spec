@@ -4,20 +4,25 @@
 #
 Name     : python-keyczar
 Version  : 0.716
-Release  : 13
+Release  : 14
 URL      : http://pypi.debian.net/python-keyczar/python-keyczar-0.716.tar.gz
 Source0  : http://pypi.debian.net/python-keyczar/python-keyczar-0.716.tar.gz
 Summary  : Toolkit for safe and simple cryptography
 Group    : Development/Tools
 License  : Apache-2.0
 Requires: python-keyczar-bin
+Requires: python-keyczar-python3
 Requires: python-keyczar-python
+Requires: pyasn1
+Requires: pycrypto
 BuildRequires : pbr
 BuildRequires : pip
+BuildRequires : pyasn1
 BuildRequires : pyasn1-python
 BuildRequires : pycrypto
 BuildRequires : python-dev
 BuildRequires : python-keyczar
+BuildRequires : python3-dev
 BuildRequires : setuptools
 
 %description
@@ -34,27 +39,43 @@ bin components for the python-keyczar package.
 %package python
 Summary: python components for the python-keyczar package.
 Group: Default
-Requires: pyasn1-python
+Requires: python-keyczar-python3
 
 %description python
 python components for the python-keyczar package.
+
+
+%package python3
+Summary: python3 components for the python-keyczar package.
+Group: Default
+Requires: python3-core
+
+%description python3
+python3 components for the python-keyczar package.
 
 
 %prep
 %setup -q -n python-keyczar-0.716
 
 %build
+export http_proxy=http://127.0.0.1:9/
+export https_proxy=http://127.0.0.1:9/
+export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-python2 setup.py build -b py2
+export SOURCE_DATE_EPOCH=1517697235
+python3 setup.py build -b py3
 
 %check
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-pushd tests/keyczar_tests ; python alltests.py ; popd
+pushd tests/keyczar_tests ; python2 alltests.py || : ; popd
 %install
 rm -rf %{buildroot}
-python2 -tt setup.py build -b py2 install --root=%{buildroot}
+python3 -tt setup.py build -b py3 install --root=%{buildroot}
+echo ----[ mark ]----
+cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
+echo ----[ mark ]----
 
 %files
 %defattr(-,root,root,-)
@@ -65,4 +86,7 @@ python2 -tt setup.py build -b py2 install --root=%{buildroot}
 
 %files python
 %defattr(-,root,root,-)
-/usr/lib/python*/*
+
+%files python3
+%defattr(-,root,root,-)
+/usr/lib/python3*/*
